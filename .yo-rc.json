@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "16.15.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.19.0",
+    "libraryName": "important-links",
+    "libraryId": "caae0ab3-9583-4866-a002-502dfbf1fd44",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "Important_Links",
+    "solutionShortDescription": "Important_Links description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
