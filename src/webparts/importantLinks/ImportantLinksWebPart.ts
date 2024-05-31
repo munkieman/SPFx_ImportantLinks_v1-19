@@ -7,6 +7,7 @@ import {
   PropertyPaneButton,
   PropertyPaneButtonType,  
   IPropertyPaneGroup,
+  IPropertyPanePage,
   PropertyPaneDropdown,
   PropertyPaneHorizontalRule
 } from '@microsoft/sp-property-pane';
@@ -192,6 +193,9 @@ export default class ImportantLinksWebPart extends BaseClientSideWebPart<IImport
     let linkList : any={};
     const linkGroups : IPropertyPaneGroup["groupFields"]=[];
     const group1Links : IPropertyPaneGroup["groupFields"]=[];
+    const listPanels: IPropertyPaneGroup[] =[];
+    //const page2 : IPropertyPanePage["groups"]=[];
+    //const page3 : IPropertyPanePage["groups"]=[];
 
     for(let x=1; x<=this.properties.numGroups;x++){
       if(this.properties.useList){
@@ -283,6 +287,47 @@ export default class ImportantLinksWebPart extends BaseClientSideWebPart<IImport
       }
     }
     
+    //page2.push({groupName:"Link Groups",groupFields : linkGroups});
+  
+    for (var x = 1; x <= this.properties.numGroups; x++) {
+
+      var singlePanel: IPropertyPaneGroup = {
+        groupName: "Panel"+x,
+        isCollapsed: true,
+        groupFields: [
+          PropertyPaneHorizontalRule(),
+          PropertyPaneTextField('Title', {
+            label: 'Title Panel',
+            placeholder: 'Insert Title',
+          }),
+          PropertyPaneTextField('ImgPath', {
+            label: 'Image Path',
+            placeholder: 'Insert Path Image URL',
+          }),
+          PropertyPaneTextField('Link', {
+            label: 'Link Image',
+            placeholder: 'Insert Link',
+          }),
+          PropertyPaneDropdown('WidthValue', {
+            label: 'Width Value',
+            disabled: false,
+            options: [{key: 'One', text: 'One'}, {key: 'Two', text: 'Two'}, {key: 'Three', text: 'Three'}]
+          }),
+        ]
+      };
+      listPanels.push(singlePanel);
+      console.log(listPanels.length);
+  }
+/*    
+      groups: [
+        {
+          groupName: "Link Groups",
+          groupFields: linkGroups
+        }
+      ]
+    )
+*/
+
     // setup pages based on number of groups selected.
     
     return {
@@ -313,15 +358,11 @@ export default class ImportantLinksWebPart extends BaseClientSideWebPart<IImport
           ]
         },
         { //Page 2
-          header: {
-            description: "Page 2 – Groups Setup"
+          displayGroupsAsAccordion: true,
+          header : {
+            description : "Page 2 = Groups Setup"
           },
-          groups: [
-            {
-              groupName: "Link Groups",
-              groupFields: linkGroups
-            }
-          ]
+          groups : listPanels
         },
         { //Page 3
           header: {
